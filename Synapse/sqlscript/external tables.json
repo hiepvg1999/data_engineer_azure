@@ -1,0 +1,17 @@
+{
+	"name": "external tables",
+	"properties": {
+		"content": {
+			"query": "CREATE SCHEMA raw;\nGO\n\nCREATE EXTERNAL TABLE raw.riders(\n    [rider_id] int,\n    [first] nvarchar(50),\n    [last] nvarchar(50),\n    [address] nvarchar(100),\n    [birthday] nvarchar(50),\n    [account_start_date] nvarchar(50),\n    [account_end_date] nvarchar(50),\n    [is_member] bit\n)\n    WITH (\n        LOCATION = '/raw/rider.csv',\n        DATA_SOURCE = [MyAzureStorage],\n        FILE_FORMAT = [textdelimited]\n)\n\nCREATE EXTERNAL TABLE raw.payments(\n    [payment_id] int,\n    [date] nvarchar(50),\n    [amount] float,\n    [rider_id] int\n)\n    WITH (\n        LOCATION = '/raw/payment.csv',\n        DATA_SOURCE = [MyAzureStorage],\n        FILE_FORMAT = [textdelimited]\n)\n\nCREATE EXTERNAL TABLE raw.stations(\n    [station_id] nvarchar(50),\n    [name] nvarchar(75),\n    [latitude] float,\n    [longitude] float\n)\n    WITH (\n        LOCATION = '/raw/station.csv',\n        DATA_SOURCE = [MyAzureStorage],\n        FILE_FORMAT = [textdelimited]\n)\n\nCREATE EXTERNAL TABLE raw.trips(\n    [trip_id] nvarchar(50),\n    [rideable_type] nvarchar(75),\n    [start_at] nvarchar(50),\n    [ended_at] nvarchar(50),\n    [start_station_id] nvarchar(50),\n    [end_station_id] nvarchar(50),\n    [rider_id] int\n)\n    WITH (\n        LOCATION='/raw/trip.csv',\n        DATA_SOURCE = [MyAzureStorage],\n        FILE_FORMAT = [textdelimited]\n    )\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_udacity",
+				"poolName": "test_udacity"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
