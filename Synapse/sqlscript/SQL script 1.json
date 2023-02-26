@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "CREATE EXTERNAL FILE FORMAT textdelimited\nWITH (\n    FORMAT_TYPE = DELIMITEDTEXT,\n    FORMAT_OPTIONS (\n        FIELD_TERMINATOR = ',',\n        STRING_DELIMITER = '\"',\n        USE_TYPE_DEFAULT = FALSE,\n        ENCODING = 'UTF8')\n); \nGO\n\nCREATE MASTER KEY ENCRYPTION BY PASSWORD = '<password>' ;\nGO\nCREATE DATABASE SCOPED CREDENTIAL AzureStorageCredential\nWITH\n  IDENTITY = '<user>', -- to use SAS the identity must be fixed as-is\n  SECRET = '<storage_account_access_key>' ;\nGO\n-- Create an external data source with CREDENTIAL option.\nCREATE EXTERNAL DATA SOURCE MyAzureStorage\nWITH\n  ( LOCATION = 'wasbs://<blob_container_name>@<storage_account_name>.blob.core.windows.net' ,\n    CREDENTIAL = AzureStorageCredential\n  ) ;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_udacity",
+				"poolName": "test_udacity"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
