@@ -126,7 +126,8 @@
 				]
 			},
 			"cw_folderName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "raw"
 			}
 		},
 		"annotations": [],
